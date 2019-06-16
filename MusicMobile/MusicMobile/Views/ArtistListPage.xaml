@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicMobile.Views.ArtistListPage"
+             Title="Artists"
+             BackgroundColor="Black">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" Command="{Binding NewArtistCommand}"/>
+        <ToolbarItem Text="View" Command="{Binding ViewArtistCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ActivityIndicator Grid.Row="0" 
+                               IsRunning="{Binding IsBusy}" 
+                               WidthRequest="40" 
+                               HeightRequest="40"/>
+
+            <CollectionView Grid.Row="1" 
+                            ItemsSource="{Binding ArtistsList}" 
+                            SelectedItem="{Binding SelectedArtist, Mode=TwoWay}"
+                            SelectionMode="Single"
+                            Margin="10"
+                            BackgroundColor="LightGray">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid VerticalOptions="Center" Padding="10,10,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Frame HasShadow="True" Padding="5">
+                                <Grid BackgroundColor="White">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="300"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0" 
+                                           Grid.Column="0"
+                                           Text="{Binding ArtistName}"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           TextColor="Blue"/>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
